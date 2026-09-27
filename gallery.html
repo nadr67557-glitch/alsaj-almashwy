@@ -1,1 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الصور | الصاج - المشوي</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, 'Cairo', Arial, sans-serif;
+            direction: rtl;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
 
+        /* ===== Header ===== */
+        .gallery-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(200, 29, 29, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 10, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+        .gallery-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b1a, #c81d1d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .back-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .back-link:hover {
+            color: #fff;
+            border-color: #ff6b1a;
+            background: rgba(200, 29, 29, 0.15);
+        }
+
+        /* ===== Gallery Grid ===== */
+        .gallery-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(200, 29, 29, 0.5);
+            box-shadow: 0 12px 30px rgba(200, 29, 29, 0.15);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1.5rem;
+        }
+        .lightbox.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lightbox-close:hover {
+            background: rgba(200, 29, 29, 0.8);
+            border-color: #c81d1d;
+            transform: rotate(90deg);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 0.75rem;
+            }
+            .gallery-header {
+                padding: 1rem 1.25rem;
+            }
+            .lightbox-close {
+                top: 1rem;
+                left: 1rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="gallery-header">
+        <h1 class="gallery-title">معرض الصور</h1>
+        <a href="index.html" class="back-link">العودة للرئيسية</a>
+    </header>
+
+    <!-- Gallery Grid -->
+    <main class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Batch 02 — 16 صورة -->
+            <div class="gallery-item" data-src="images/menu/batch02-photo-01.jpg">
+                <img src="images/menu/batch02-photo-01.jpg" alt="صورة 1" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-02.jpg">
+                <img src="images/menu/batch02-photo-02.jpg" alt="صورة 2" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-03.jpg">
+                <img src="images/menu/batch02-photo-03.jpg" alt="صورة 3" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-04.jpg">
+                <img src="images/menu/batch02-photo-04.jpg" alt="صورة 4" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-05.jpg">
+                <img src="images/menu/batch02-photo-05.jpg" alt="صورة 5" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-06.jpg">
+                <img src="images/menu/batch02-photo-06.jpg" alt="صورة 6" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-07.jpg">
+                <img src="images/menu/batch02-photo-07.jpg" alt="صورة 7" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-08.jpg">
+                <img src="images/menu/batch02-photo-08.jpg" alt="صورة 8" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-09.jpg">
+                <img src="images/menu/batch02-photo-09.jpg" alt="صورة 9" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-10.jpg">
+                <img src="images/menu/batch02-photo-10.jpg" alt="صورة 10" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-11.jpg">
+                <img src="images/menu/batch02-photo-11.jpg" alt="صورة 11" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-12.jpg">
+                <img src="images/menu/batch02-photo-12.jpg" alt="صورة 12" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-13.jpg">
+                <img src="images/menu/batch02-photo-13.jpg" alt="صورة 13" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-14.jpg">
+                <img src="images/menu/batch02-photo-14.jpg" alt="صورة 14" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-15.jpg">
+                <img src="images/menu/batch02-photo-15.jpg" alt="صورة 15" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch02-photo-16.jpg">
+                <img src="images/menu/batch02-photo-16.jpg" alt="صورة 16" loading="lazy">
+            </div>
+
+            <!-- Batch 03 — 9 صور -->
+            <div class="gallery-item" data-src="images/menu/batch03-photo-01.jpg">
+                <img src="images/menu/batch03-photo-01.jpg" alt="صورة 17" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-02.jpg">
+                <img src="images/menu/batch03-photo-02.jpg" alt="صورة 18" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-03.jpg">
+                <img src="images/menu/batch03-photo-03.jpg" alt="صورة 19" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-04.jpg">
+                <img src="images/menu/batch03-photo-04.jpg" alt="صورة 20" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-05.jpg">
+                <img src="images/menu/batch03-photo-05.jpg" alt="صورة 21" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-06.jpg">
+                <img src="images/menu/batch03-photo-06.jpg" alt="صورة 22" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-07.jpg">
+                <img src="images/menu/batch03-photo-07.jpg" alt="صورة 23" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-08.jpg">
+                <img src="images/menu/batch03-photo-08.jpg" alt="صورة 24" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch03-photo-09.jpg">
+                <img src="images/menu/batch03-photo-09.jpg" alt="صورة 25" loading="lazy">
+            </div>
+
+            <!-- Batch 04 — 9 صور -->
+            <div class="gallery-item" data-src="images/menu/batch04-photo-01.jpg">
+                <img src="images/menu/batch04-photo-01.jpg" alt="صورة 26" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-02.jpg">
+                <img src="images/menu/batch04-photo-02.jpg" alt="صورة 27" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-03.jpg">
+                <img src="images/menu/batch04-photo-03.jpg" alt="صورة 28" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-04.jpg">
+                <img src="images/menu/batch04-photo-04.jpg" alt="صورة 29" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-05.jpg">
+                <img src="images/menu/batch04-photo-05.jpg" alt="صورة 30" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-06.jpg">
+                <img src="images/menu/batch04-photo-06.jpg" alt="صورة 31" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-07.jpg">
+                <img src="images/menu/batch04-photo-07.jpg" alt="صورة 32" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-08.jpg">
+                <img src="images/menu/batch04-photo-08.jpg" alt="صورة 33" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch04-photo-09.jpg">
+                <img src="images/menu/batch04-photo-09.jpg" alt="صورة 34" loading="lazy">
+            </div>
+
+            <!-- Batch 05 — 8 صور -->
+            <div class="gallery-item" data-src="images/menu/batch05-photo-01.jpg">
+                <img src="images/menu/batch05-photo-01.jpg" alt="صورة 35" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-02.jpg">
+                <img src="images/menu/batch05-photo-02.jpg" alt="صورة 36" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-03.jpg">
+                <img src="images/menu/batch05-photo-03.jpg" alt="صورة 37" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-04.jpg">
+                <img src="images/menu/batch05-photo-04.jpg" alt="صورة 38" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-05.jpg">
+                <img src="images/menu/batch05-photo-05.jpg" alt="صورة 39" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-06.jpg">
+                <img src="images/menu/batch05-photo-06.jpg" alt="صورة 40" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-07.jpg">
+                <img src="images/menu/batch05-photo-07.jpg" alt="صورة 41" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/batch05-photo-08.jpg">
+                <img src="images/menu/batch05-photo-08.jpg" alt="صورة 42" loading="lazy">
+            </div>
+
+            <!-- Menu — 4 صور -->
+            <div class="gallery-item" data-src="images/menu/menu-photo-01.jpg">
+                <img src="images/menu/menu-photo-01.jpg" alt="صورة 43" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/menu-photo-02.jpg">
+                <img src="images/menu/menu-photo-02.jpg" alt="صورة 44" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/menu-photo-03.jpg">
+                <img src="images/menu/menu-photo-03.jpg" alt="صورة 45" loading="lazy">
+            </div>
+            <div class="gallery-item" data-src="images/menu/menu-photo-04.jpg">
+                <img src="images/menu/menu-photo-04.jpg" alt="صورة 46" loading="lazy">
+            </div>
+
+            <!-- Restaurant banner — صورة واحدة -->
+            <div class="gallery-item" data-src="images/menu/restaurant-banner-01.jpg">
+                <img src="images/menu/restaurant-banner-01.jpg" alt="صورة 47" loading="lazy">
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">&times;</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="عرض مكبر">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        (function() {
+            'use strict';
+            
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+
+            // فتح الـ Lightbox
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-src');
+                    if (imgSrc) {
+                        lightboxImg.src = imgSrc;
+                        lightbox.classList.add('is-open');
+                        lightbox.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            // دالة الإغلاق
+            function closeLightbox() {
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    lightboxImg.src = '';
+                }, 300);
+            }
+
+            // أحداث الإغلاق
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+            
+            // الإغلاق عند الضغط على الخلفية
+            if (lightbox) {
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // الإغلاق بزر Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+                    closeLightbox();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
