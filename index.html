@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصاج - المشوي | مشوي على أصله</title>
+    <meta name="description" content="مطعم الصاج - المشوي على أصله بطعم لا يُنسى">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ========== 1. HERO (موجود مسبقاً - لم يتغير) ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-video-wrapper">
+            <video 
+                class="hero-video"
+                autoplay muted loop playsinline preload="metadata"
+                poster="images/hero-poster.jpg">
+                <source src="videos/hero.mp4" type="video/mp4">
+                <source src="videos/hero.webm" type="video/webm">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/logo.png" alt="شعار الصاج - المشوي" class="logo-img">
+                <div class="logo-placeholder" aria-hidden="true"><span>الصاج</span></div>
+            </div>
+            <div class="hero-text">
+                <h1 class="hero-title">مشوي على أصله...</h1>
+                <p class="hero-subtitle">بطعم لا يُنسى</p>
+            </div>
+            <a href="#featured" class="hero-cta"><span>تصفح المنيو</span></a>
+        </div>
+    </section>
+
+    <!-- ========== 2. الصورة الثابتة الكبيرة ========== -->
+    <section class="hero-image-section">
+        <div class="hero-static-image" style="background-image: url('images/hero-static.jpg');">
+            <div class="static-image-overlay"></div>
+            <div class="static-image-caption">
+                <span>فن الشواء على الصاج</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 3. أبرز الأطباق ========== -->
+    <section class="featured" id="featured">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">أبرز الأطباق</h2>
+                <p class="section-subtitle">من صاجنا مباشرة إلى مائدتك</p>
+            </header>
+
+            <!-- البطاقات تُولَّد من RestaurantData عبر main.js — لا أسماء يدوية في HTML -->
+            <div class="featured-grid" id="featuredGrid"></div>
+        </div>
+    </section>
+
+    <!-- ========== 4. المنيو التفاعلي ========== -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">قائمة الطعام</h2>
+                <p class="section-subtitle">تصفّح أصنافنا المختارة بعناية</p>
+            </header>
+
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">الكل</button>
+            </div>
+
+            <div class="menu-grid">
+                <article class="menu-item" data-category="all" data-item-id="item-1">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-1.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="menu-item" data-category="all" data-item-id="item-2">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-2.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="menu-item" data-category="all" data-item-id="item-3">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-3.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="menu-item" data-category="all" data-item-id="item-4">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-4.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="menu-item" data-category="all" data-item-id="item-5">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-5.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="menu-item" data-category="all" data-item-id="item-6">
+                    <div class="menu-item-image" style="background-image: url('images/menu/item-6.jpg');"></div>
+                    <div class="menu-item-body">
+                        <h3 class="menu-item-name">—</h3>
+                        <p class="menu-item-desc">وصف المنتج سيُضاف عند توفر البيانات</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">—</span>
+                            <button class="menu-item-add" type="button">+ للسلة</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 5. السلة (Drawer + زر عائم) ========== -->
+    <button class="cart-fab" id="cartFab" type="button" aria-label="فتح السلة">
+        <span class="cart-fab-icon" aria-hidden="true">🛒</span>
+        <span class="cart-fab-count" id="cartFabCount">0</span>
+    </button>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+        <div class="cart-backdrop" id="cartBackdrop"></div>
+        <div class="cart-panel">
+            <header class="cart-header">
+                <h2>سلتك</h2>
+                <button class="cart-close" id="cartClose" type="button" aria-label="إغلاق السلة">×</button>
+            </header>
+
+            <div class="cart-body" id="cartBody">
+                <div class="cart-empty">
+                    <p>سلتك فارغة</p>
+                    <p class="cart-empty-hint">أضف أطباقك المفضلة من المنيو</p>
+                </div>
+            </div>
+
+            <footer class="cart-footer">
+                <div class="cart-branch">
+                    <label for="branchSelect">اختر الفرع:</label>
+                    <select id="branchSelect" class="cart-select">
+                        <option value="">— اختر فرعاً —</option>
+                    </select>
+                </div>
+                <div class="cart-total">
+                    <span>الإجمالي:</span>
+                    <span class="cart-total-amount" id="cartTotal">0</span>
+                </div>
+                <button class="cart-checkout" id="cartCheckout" type="button">
+                    إرسال الطلب عبر واتساب
+                </button>
+            </footer>
+        </div>
+    </aside>
+
+    <!-- ========== Product Modal — هيكل فقط بانتظار الربط بالبيانات الحقيقية ========== -->
+    <div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalName" aria-hidden="true">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-panel">
+            <button type="button" class="modal-close" id="modalClose" aria-label="إغلاق نافذة المنتج">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            <div class="modal-image" id="modalImage" role="img" aria-label="صورة المنتج"></div>
+
+            <div class="modal-body">
+                <h3 class="modal-name" id="modalName"></h3>
+                <p class="modal-desc" id="modalDesc"></p>
+                <p class="modal-price" id="modalPrice"></p>
+
+                <section class="modal-additions" id="modalAdditions" hidden>
+                    <h4 class="modal-additions-title">الإضافات</h4>
+                    <!-- تُعبّأ الإضافات الحقيقية لاحقًا عبر JavaScript -->
+                </section>
+
+                <div class="modal-quantity">
+                    <span class="modal-quantity-label">الكمية</span>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" id="qtyMinus" aria-label="إنقاص الكمية">−</button>
+                        <span class="qty-value" id="qtyValue">1</span>
+                        <button type="button" class="qty-btn" id="qtyPlus" aria-label="زيادة الكمية">+</button>
+                    </div>
+                </div>
+
+                <button type="button" class="modal-add-btn" id="modalAddBtn">أضف للسلة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 6. الخدمات ========== -->
+    <section class="services" id="services">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">خدماتنا</h2>
+            </header>
+
+            <!-- الخدمة تُولَّد من MENU_DATA.services عبر main.js — لا أسماء يدوية -->
+            <div class="services-grid" id="servicesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ========== 7. الفروع ========== -->
+    <section class="branches" id="branches">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">فروعنا</h2>
+                <!-- سطر العنوان الفرعي يُملأ من MENU_DATA.branches — لا نص يدوي -->
+                <p class="section-subtitle" id="branchesSubtitle"></p>
+            </header>
+
+            <!-- البطاقات تُولَّد من branches.main + branches.additional عبر renderBranches() -->
+            <div class="branches-grid" id="branchesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ========== 7b. التطبيق ========== -->
+    <section class="app-promo" id="app">
+        <div class="container app-promo-inner">
+            <div class="app-promo-text">
+                <p class="app-promo-kicker">AlSaj AlMashwy</p>
+                <h2 class="app-promo-title">تطبيق الصاج المشوي</h2>
+                <p class="app-promo-desc">Your favorite meals</p>
+                <ul class="app-promo-features">
+                    <li>تصفح المنيو</li>
+                    <li>تخصيص الطلب</li>
+                    <li>التوصيل أو الاستلام من الفرع</li>
+                    <li>تتبع الطلب</li>
+                    <li>الدفع عند الاستلام</li>
+                </ul>
+                <a class="app-promo-btn" href="https://apps.apple.com/sa/app/alsaj-almashwy/id6756935653" target="_blank" rel="noopener">
+                    تحميل التطبيق من App Store
+                </a>
+            </div>
+
+            <aside class="app-promo-facts" aria-label="معلومات التطبيق الرسمية">
+                <div class="app-fact"><span>الفئة</span><strong>Food & Drink</strong></div>
+                <div class="app-fact"><span>المنصات</span><strong>iPhone و iPad</strong></div>
+                <div class="app-fact"><span>الإصدار</span><strong dir="ltr">2.2.0</strong></div>
+                <div class="app-fact"><span>حجم التطبيق</span><strong dir="ltr">37.2 MB</strong></div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ========== 8. تواصل معنا ========== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">تواصل معنا</h2>
+            </header>
+
+            <!-- بطاقات التواصل تُبنى من MENU_DATA.contact عبر renderContact() -->
+            <div class="contact-grid" id="contactGrid"></div>
+
+            <!-- الشبكات تُبنى من MENU_DATA.social عبر renderSocial() — بلا روابط غير معتمدة -->
+            <div class="social-links" id="socialLinks"></div>
+        </div>
+    </section>
+
+    <!-- ========== 9. Footer ========== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3 class="footer-logo-text">الصاج - المشوي</h3>
+                    <p class="footer-tagline">«مشوي على أصله ... بطعم لا يُنسى»</p>
+                </div>
+
+                <nav class="footer-nav">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#hero">الرئيسية</a></li>
+                        <li><a href="#menu">المنيو</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#branches">الفروع</a></li>
+                        <li><a href="#app">التطبيق</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer-contact">
+                    <h4>بيانات المطعم</h4>
+                    <p>📞 <a href="tel:0502686862" dir="ltr">0502686862</a></p>
+                    <p>✉️ <a href="mailto:alsajalmashwy@gmail.com" dir="ltr">alsajalmashwy@gmail.com</a></p>
+                    <p>📍 نجران — طريق الملك سلمان بن عبدالعزيز (ش الجيش)</p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © <span id="currentYear"></span> الصاج - المشوي — جميع الحقوق محفوظة
+                </p>
+
+                <div class="footer-designer">
+                    <div class="designer-logo">
+                        <span class="designer-badge">KJ</span>
+                    </div>
+                    <div class="designer-info">
+                        <p class="designer-name">خالد الجراش</p>
+                        <p class="designer-role">مصمم مواقع وحلول رقمية</p>
+                        <p class="designer-phone">
+                            <a href="tel:779184839" dir="ltr">779184839</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
